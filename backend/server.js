@@ -1,6 +1,12 @@
-const app=require('./src/app.js')
-const dotenv=require('dotenv')
-dotenv.config()
-const connectDb = require('./src/config/db.js')
-connectDb(process.env.MONGO_URI);
-app.listen(4000,()=>{console.log('hii server is running')})
+require("dotenv").config()
+
+const app = require("./src/app")
+const connectDb = require("./src/config/db")
+
+const PORT = process.env.PORT || 5000
+
+connectDb()
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+})
