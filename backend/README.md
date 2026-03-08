@@ -7,7 +7,7 @@ MarketNest is a **full-stack MERN marketplace application** where users can brow
 # 🚀 Live Demo
 
 Frontend (Vercel)  
-https://market-nest.vercel.app
+https://market-nest-bqa2xb7ag-anujs-projects-d09b3b9a.vercel.app
 
 Backend API (Render)  
 https://marketnest-c5n5.onrender.com
