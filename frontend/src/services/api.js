@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://marketnest-c5n5.onrender.com/api",
   withCredentials: true,
 });
 
