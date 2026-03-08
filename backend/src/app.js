@@ -12,7 +12,6 @@ const app = express()
 app.use(express.json())
 app.use(cors({
     origin: [
-      "http://localhost:5173",
       "market-nest-bqa2xb7ag-anujs-projects-d09b3b9a.vercel.app"
     ],
     credentials: true
