@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cors({
     origin: [
       "http://localhost:5173",
-      "https://marketnest.vercel.app"
+      "market-nest-bqa2xb7ag-anujs-projects-d09b3b9a.vercel.app"
     ],
     credentials: true
   }))
