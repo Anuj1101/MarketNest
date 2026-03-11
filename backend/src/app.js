@@ -12,7 +12,7 @@ const app = express()
 app.use(express.json())
 app.use(cors({
     origin: [
-      "market-nest-bqa2xb7ag-anujs-projects-d09b3b9a.vercel.app"
+      "https://market-nest-coral.vercel.app"
     ],
     credentials: true
   }))
