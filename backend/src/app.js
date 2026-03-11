@@ -10,12 +10,13 @@ const productRoutes = require("./routes/productRoutes")
 const app = express()
 
 app.use(express.json())
-app.use(cors({
-    origin: [
-      "https://market-nest-coral.vercel.app"
-    ],
+app.use(
+  cors({
+    origin: "https://market-nest-coral.vercel.app",
+    methods: ["GET","POST","PUT","DELETE"],
     credentials: true
-  }))
+  })
+);
 app.use(cookieParser())
 
 // Routes
