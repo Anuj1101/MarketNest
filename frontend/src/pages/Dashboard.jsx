@@ -108,7 +108,7 @@ function CustomerDashboard() {
         API.get("/products")
       ]);
       setCart(Array.isArray(cartRes.data) ? cartRes.data : []);
-      setProducts(prodRes.data.products || []);
+      setProducts((prodRes.data.products || []).slice(0, 3));
     } catch (err) { console.error(err); }
     finally { setLoading(false); }
   };
@@ -152,7 +152,10 @@ function CustomerDashboard() {
 
           {/* Products */}
           <div className="lg:col-span-2">
-            <h2 className="text-lg font-semibold text-slate-800 mb-4">Available Products</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-slate-800">Available Products</h2>
+              <Link to="/marketplace" className="text-sm text-indigo-600 font-medium hover:underline">Browse All →</Link>
+            </div>
             {products.length === 0 ? (
               <p className="text-slate-400">No products available yet.</p>
             ) : (
