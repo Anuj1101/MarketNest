@@ -13,13 +13,11 @@ function BrandDashboard() {
   const [stats, setStats] = useState({ totalProducts: 0, publishedProducts: 0, archivedProducts: 0 });
   const [products, setProducts] = useState([]);
 
-  const authHeader = () => ({ headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
-
   const fetchData = async () => {
     try {
       const [statsRes, prodRes] = await Promise.all([
-        API.get("/products/dashboard", authHeader()),
-        API.get("/products/my-products", authHeader())
+        API.get("/products/dashboard"),
+        API.get("/products/my-products")
       ]);
       setStats(statsRes.data);
       setProducts(prodRes.data);
@@ -31,7 +29,7 @@ function BrandDashboard() {
   const deleteProduct = async (id) => {
     if (!window.confirm("Are you sure? This cannot be undone.")) return;
     try {
-      await API.delete(`/products/${id}`, authHeader());
+      await API.delete(`/products/${id}`);
       fetchData();
     } catch { alert("Delete failed"); }
   };
@@ -102,12 +100,10 @@ function CustomerDashboard() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const authHeader = () => ({ headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
-
   const fetchData = async () => {
     try {
       const [cartRes, prodRes] = await Promise.all([
-        API.get("/cart", authHeader()),
+        API.get("/cart"),
         API.get("/products")
       ]);
       setCart(cartRes.data);
@@ -120,14 +116,14 @@ function CustomerDashboard() {
 
   const addToCart = async (productId) => {
     try {
-      await API.post("/cart", { productId }, authHeader());
+      await API.post("/cart", { productId });
       fetchData();
     } catch { alert("Failed to add to cart"); }
   };
 
   const removeFromCart = async (productId) => {
     try {
-      await API.delete(`/cart/${productId}`, authHeader());
+      await API.delete(`/cart/${productId}`);
       fetchData();
     } catch { alert("Failed to remove from cart"); }
   };
