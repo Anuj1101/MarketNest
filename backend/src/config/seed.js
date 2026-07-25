@@ -1,16 +1,9 @@
-require("dotenv").config()
-const dns = require("dns")
-dns.setServers(["8.8.8.8", "8.8.4.4"])
-
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
-const User = require("./src/models/User")
-const Product = require("./src/models/Product")
+const User = require("../models/User")
+const Product = require("../models/Product")
 
 const seed = async () => {
-    await mongoose.connect(process.env.MONGO_URI)
-    console.log("Connected to MongoDB")
-
     await User.deleteMany({})
     await Product.deleteMany({})
 
@@ -83,8 +76,6 @@ const seed = async () => {
     ])
 
     console.log("Sample data seeded successfully!")
-    console.log("Brand logins: tech@brand.com / fashion@brand.com  |  password: password123")
-    process.exit(0)
 }
 
-seed().catch(e => { console.error(e.message); process.exit(1) })
+module.exports = seed

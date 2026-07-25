@@ -68,12 +68,7 @@ https://marketnest-c5n5.onrender.com
 
 # 🧪 Sample / Dummy Data
 
-To seed the database with sample users and products, run:
-
-```
-cd backend
-node seed.js
-```
+Sample data is automatically seeded into the database on every server start.
 
 ## 👤 Dummy Users
 
@@ -94,7 +89,7 @@ node seed.js
 | Denim Jacket | Clothing | ₹1,999 | FashionHub |
 | Leather Wallet | Accessories | ₹799 | FashionHub |
 
-> ⚠️ Running `seed.js` will **clear all existing data** before inserting sample data.
+> ⚠️ Sample data **clears all existing data** on every server start.
 
 ---
 
@@ -113,7 +108,6 @@ MarketNest
 │   │   ├── services
 │   │   └── app.js
 │   │
-│   ├── seed.js
 │   └── server.js
 │
 └── frontend
