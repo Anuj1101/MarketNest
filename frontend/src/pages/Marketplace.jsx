@@ -84,8 +84,14 @@ function Marketplace() {
 
             {/* Pagination UI goes here */}
             {products.length === 0 && (
-              <div className="text-center py-20 text-gray-500">
-                No items found for your search.
+              <div className="text-center py-24">
+                <div className="text-6xl mb-6">🛍️</div>
+                <h2 className="text-3xl font-black text-gray-800 mb-3">Welcome to MarketNest</h2>
+                <p className="text-gray-500 mb-10 text-lg">No products yet. Be the first to list something!</p>
+                <div className="flex justify-center gap-4 flex-wrap">
+                  <a href="/signup" className="bg-indigo-600 text-white px-8 py-3 rounded-2xl font-bold text-sm hover:bg-indigo-700 transition-all shadow-md shadow-indigo-100">Create Account</a>
+                  <a href="/login" className="bg-white border border-gray-200 text-gray-700 px-8 py-3 rounded-2xl font-bold text-sm hover:bg-gray-50 transition-all">Login</a>
+                </div>
               </div>
             )}
           </>
