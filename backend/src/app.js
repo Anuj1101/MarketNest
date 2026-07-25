@@ -6,6 +6,7 @@ const errorMiddleware = require("./middlewares/errorMiddleware")
 
 const authRoutes = require("./routes/authRoutes")
 const productRoutes = require("./routes/productRoutes")
+const cartRoutes = require("./routes/cartRoutes")
 
 const app = express()
 
@@ -31,6 +32,7 @@ app.use(cookieParser())
 // Routes
 app.use("/api/auth", authRoutes)
 app.use("/api/products", productRoutes)
+app.use("/api/cart", cartRoutes)
 
 // Error handler (always last)
 app.use(errorMiddleware)
