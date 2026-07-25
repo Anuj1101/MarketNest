@@ -3,8 +3,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { LockClosedIcon, EnvelopeIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import API from "../services/api";
 
+import { useAuth } from "../context/AuthContext";
+
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +26,7 @@ function Login() {
         password,
       });
 
-      // Save token
+      login(res.data.accessToken);
       localStorage.setItem("token", res.data.accessToken);
 
       // Redirect to dashboard

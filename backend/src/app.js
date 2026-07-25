@@ -10,9 +10,18 @@ const productRoutes = require("./routes/productRoutes")
 const app = express()
 
 app.use(express.json())
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://market-nest-coral.vercel.app",
+  "https://market-nest-bqa2xb7ag-anujs-projects-d09b3b9a.vercel.app"
+]
+
 app.use(
   cors({
-    origin: "https://market-nest-coral.vercel.app",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) return callback(null, true)
+      callback(new Error("Not allowed by CORS"))
+    },
     methods: ["GET","POST","PUT","DELETE"],
     credentials: true
   })

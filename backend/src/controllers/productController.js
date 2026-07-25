@@ -32,22 +32,26 @@ const updateProduct = async (req,res,next)=>{
 
     try{
 
-        const product = await Product.findById(req.params.id)
+        const product = await Product.findOne({ _id: req.params.id, isDeleted: false })
 
         if(!product){
             res.status(404)
             throw new Error("Product not found")
         }
 
-        // ownership check
         if(product.brand.toString() !== req.user.id){
             res.status(403)
             throw new Error("You can edit only your own products")
         }
 
+        const updates = { ...req.body }
+        if(req.files && req.files.length > 0){
+            updates.images = req.files.map(f => f.path)
+        }
+
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id,
-            req.body,
+            updates,
             {new:true}
         )
 
@@ -211,6 +215,31 @@ const getMyProducts = async (req, res, next) => {
     }
 
 }
+
+// GET SINGLE PRODUCT FOR BRAND EDIT (no status filter)
+const getMyProductById = async (req, res, next) => {
+
+    try {
+
+        const product = await Product.findOne({
+            _id: req.params.id,
+            brand: req.user.id,
+            isDeleted: false
+        })
+
+        if(!product){
+            res.status(404)
+            throw new Error("Product not found")
+        }
+
+        res.json(product)
+
+    } catch (error) {
+        next(error)
+    }
+
+}
+
 module.exports = {
     createProduct,
     updateProduct,
@@ -218,5 +247,6 @@ module.exports = {
     getDashboardStats,
     getProducts,
     getProductById,
-    getMyProducts
+    getMyProducts,
+    getMyProductById
 }

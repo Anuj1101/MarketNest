@@ -10,7 +10,8 @@ deleteProduct,
 getDashboardStats,
 getProducts,
 getProductById,
-getMyProducts
+getMyProducts,
+getMyProductById
 } = require("../controllers/productController")
 
 const authMiddleware = require("../middlewares/authMiddleware")
@@ -56,6 +57,14 @@ router.get(
 authMiddleware,
 roleMiddleware("brand"),
 getMyProducts
+)
+
+// Brand Single Product (for edit)
+router.get(
+"/my-products/:id",
+authMiddleware,
+roleMiddleware("brand"),
+getMyProductById
 )
 
 // Marketplace

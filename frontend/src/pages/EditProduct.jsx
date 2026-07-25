@@ -16,7 +16,7 @@ function EditProduct() {
 
   const fetchProduct = async () => {
     try {
-      const res = await API.get(`/products/${id}`);
+      const res = await API.get(`/products/my-products/${id}`);
       const p = res.data;
       setName(p.name);
       setPrice(p.price);
