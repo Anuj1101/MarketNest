@@ -137,6 +137,17 @@ function CustomerDashboard() {
     } finally { setLoadingId(null); }
   };
 
+  const updateQty = async (productId, quantity) => {
+    if (quantity < 1) return removeFromCart(productId);
+    setLoadingId(productId);
+    try {
+      await API.put(`/cart/${productId}`, { quantity });
+      await fetchData();
+    } catch (err) {
+      console.error(err);
+    } finally { setLoadingId(null); }
+  };
+
   const cartTotal = cart.reduce((sum, item) => sum + (item.product?.price || 0) * item.quantity, 0);
   const cartProductIds = new Set(cart.map(i => i.product?._id?.toString()));
 
@@ -218,7 +229,20 @@ function CustomerDashboard() {
                           : <div className="w-12 h-12 rounded-lg bg-slate-100 flex-shrink-0" />}
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-slate-900 truncate">{item.product?.name}</p>
-                          <p className="text-xs text-slate-500">₹{item.product?.price?.toLocaleString("en-IN")} × {item.quantity}</p>
+                          <p className="text-xs text-slate-500">₹{item.product?.price?.toLocaleString("en-IN")}</p>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => updateQty(item.product?._id, item.quantity - 1)}
+                            disabled={loadingId === item.product?._id}
+                            className="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm disabled:opacity-50"
+                          >−</button>
+                          <span className="w-5 text-center text-sm font-semibold">{item.quantity}</span>
+                          <button
+                            onClick={() => updateQty(item.product?._id, item.quantity + 1)}
+                            disabled={loadingId === item.product?._id}
+                            className="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm disabled:opacity-50"
+                          >+</button>
                         </div>
                         <button
                           onClick={() => removeFromCart(item.product?._id)}

@@ -38,4 +38,16 @@ const clearCart = async (req, res, next) => {
     } catch (error) { next(error) }
 }
 
-module.exports = { getCart, addToCart, removeFromCart, clearCart }
+const updateCartQty = async (req, res, next) => {
+    try {
+        const { quantity } = req.body
+        const user = await User.findById(req.user.id)
+        const item = user.cart.find(i => i.product.toString() === req.params.productId)
+        if (!item) return res.status(404).json({ message: "Item not in cart" })
+        item.quantity = quantity
+        await user.save()
+        res.json({ message: "Quantity updated" })
+    } catch (error) { next(error) }
+}
+
+module.exports = { getCart, addToCart, updateCartQty, removeFromCart, clearCart }
