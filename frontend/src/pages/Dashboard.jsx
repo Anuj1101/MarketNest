@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import API from "../services/api";
 
 function Dashboard() {
   const [stats, setStats] = useState({ totalProducts: 0, publishedProducts: 0, archivedProducts: 0 });
   const [products, setProducts] = useState([]);
+
+  const { role } = useAuth();
+  const isBrand = role === "brand";
 
   const getAuthHeader = () => ({
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -44,9 +48,11 @@ function Dashboard() {
             <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Storefront Overview</h1>
             <p className="mt-1 text-sm text-slate-500">Manage your listings, check status, and grow your sales.</p>
           </div>
-          <Link to="/create-product" className="mt-4 md:mt-0 inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span className="mr-2">+</span> Add New Product
-          </Link>
+          {isBrand && (
+            <Link to="/create-product" className="mt-4 md:mt-0 inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span className="mr-2">+</span> Add New Product
+            </Link>
+          )}
         </div>
 
         {/* --- Stats Cards --- */}
@@ -57,7 +63,8 @@ function Dashboard() {
         </div>
 
         {/* --- Product Table Section --- */}
-        <div className="bg-white shadow-sm border border-slate-200 rounded-xl overflow-hidden">
+          {isBrand && (
+          <div className="bg-white shadow-sm border border-slate-200 rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-200 bg-slate-50/50">
             <h2 className="text-lg font-semibold text-slate-800">My Products</h2>
           </div>
@@ -104,6 +111,7 @@ function Dashboard() {
             </table>
           </div>
         </div>
+          )}
 
       </div>
     </div>

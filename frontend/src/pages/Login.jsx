@@ -26,7 +26,7 @@ function Login() {
         password,
       });
 
-      login(res.data.accessToken);
+      login(res.data.accessToken, res.data.role);
       localStorage.setItem("token", res.data.accessToken);
 
       // Redirect to dashboard
