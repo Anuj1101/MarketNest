@@ -21,7 +21,7 @@ https://marketnest-c5n5.onrender.com
 - Context API
 - Axios
 - React Router
-- CSS
+- Tailwind CSS
 
 ## Backend
 - Node.js
@@ -66,6 +66,38 @@ https://marketnest-c5n5.onrender.com
 
 ---
 
+# 🧪 Sample / Dummy Data
+
+To seed the database with sample users and products, run:
+
+```
+cd backend
+node seed.js
+```
+
+## 👤 Dummy Users
+
+| Name | Email | Password | Role |
+|------|-------|----------|------|
+| TechBrand | tech@brand.com | password123 | brand |
+| FashionHub | fashion@brand.com | password123 | brand |
+| John Doe | john@customer.com | password123 | customer |
+
+## 🛍 Sample Products
+
+| Product | Category | Price | Brand |
+|---------|----------|-------|-------|
+| Wireless Headphones | Electronics | ₹2,999 | TechBrand |
+| Mechanical Keyboard | Electronics | ₹4,499 | TechBrand |
+| Smartwatch Pro | Electronics | ₹8,999 | TechBrand |
+| Running Sneakers | Footwear | ₹3,499 | FashionHub |
+| Denim Jacket | Clothing | ₹1,999 | FashionHub |
+| Leather Wallet | Accessories | ₹799 | FashionHub |
+
+> ⚠️ Running `seed.js` will **clear all existing data** before inserting sample data.
+
+---
+
 # 📂 Project Structure
 
 ```
@@ -79,9 +111,9 @@ MarketNest
 │   │   ├── models
 │   │   ├── routes
 │   │   ├── services
-│   │   ├── utils
 │   │   └── app.js
 │   │
+│   ├── seed.js
 │   └── server.js
 │
 └── frontend
